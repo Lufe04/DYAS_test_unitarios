@@ -11,7 +11,6 @@ public class Registry {
         if (votersExistentes(p)) {
             return RegisterResult.DUPLICATED; 
         }
-
         // Verificar edad
         if (p.getAge() < 18) {
             return RegisterResult.UNDERAGE;
@@ -19,11 +18,9 @@ public class Registry {
         if (p.getAge() >= 120) {
             return RegisterResult.INVALID_AGE;
         }
-        
         if (!p.isAlive()) {
             return RegisterResult.DEAD;
         }
-
         // Agregar a la lista si es válido
         voters.add(p);
         return RegisterResult.VALID;
@@ -41,4 +38,5 @@ public class Registry {
     public List<Person> getValidVoters() {
         return voters;
     }
+
 }
