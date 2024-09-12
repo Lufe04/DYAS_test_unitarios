@@ -19,28 +19,28 @@ public class RegistryTest {
     @Test
     public void validateRegistryResult(){
         //preparar
-        Person person1 = new Person("Maria", 2, 54, Gender.FEMALE, true);
+        Person person = new Person("Maria", 2, 54, Gender.FEMALE, true);
         //accion
-        RegisterResult result1 = registry.registerVoter(person1);
+        RegisterResult result = registry.registerVoter(person);
         //validar
-        Assertions.assertEquals(RegisterResult.VALID, result1);
+        Assertions.assertEquals(RegisterResult.VALID, result);
     }
 
     @Test
     public void validateRegistryResultUnderage(){
         //preparar
-        Person person2 = new Person("Lukas", 3, 17, Gender.MALE, true);
+        Person person = new Person("Lukas", 3, 17, Gender.MALE, true);
         //accion
-        RegisterResult result2 = registry.registerVoter(person2);
+        RegisterResult result = registry.registerVoter(person);
         //validar
-        Assertions.assertEquals(RegisterResult.UNDERAGE, result2);
+        Assertions.assertEquals(RegisterResult.UNDERAGE, result);
     }
 
     @Test
     public void validateRegistryResultDead(){
-        Person person3 = new Person("Luisa", 4, 25, Gender.FEMALE, false);
-        RegisterResult result3 = registry.registerVoter(person3);
-        Assertions.assertEquals(RegisterResult.DEAD, result3);
+        Person person = new Person("Luisa", 4, 25, Gender.FEMALE, false);
+        RegisterResult result = registry.registerVoter(person);
+        Assertions.assertEquals(RegisterResult.DEAD, result);
     }
 
     @Test
@@ -48,9 +48,36 @@ public class RegistryTest {
         Person person1 = new Person("Maria", 2, 54, Gender.FEMALE, true);
         RegisterResult result1 = registry.registerVoter(person1);
         
-        Person person4 = new Person("Sebastian", 2, 20, Gender.MALE, true);
-        RegisterResult result4 = registry.registerVoter(person4);
-        Assertions.assertEquals(RegisterResult.DUPLICATED, result4);
+        Person person2 = new Person("Sebastian", 2, 20, Gender.MALE, true);
+        RegisterResult result2 = registry.registerVoter(person2);
+        Assertions.assertEquals(RegisterResult.DUPLICATED, result2);
+    }
+
+    @Test
+    public void validateRegistryAge1(){
+        Person person = new Person("Lukas", 5, 18, Gender.MALE, true);
+        //accion
+        RegisterResult result = registry.registerVoter(person);
+        //validar
+        Assertions.assertEquals(RegisterResult.VALID, result);
+    }
+    
+    @Test
+    public void validateRegistryAge2(){
+        Person person = new Person("Lukas", 5, 119, Gender.MALE, true);
+        //accion
+        RegisterResult result = registry.registerVoter(person);
+        //validar
+        Assertions.assertEquals(RegisterResult.VALID, result);
+    }
+
+    @Test
+    public void validateRegistryAge3(){
+        Person person = new Person("Lukas", 5, 121,Gender.MALE, true);
+        //accion
+        RegisterResult result = registry.registerVoter(person);
+        //validar
+        Assertions.assertEquals(RegisterResult.INVALID_AGE, result);
     }
     
 }
